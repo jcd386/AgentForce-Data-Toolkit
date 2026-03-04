@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <actionCalls>
+        <description>Calls the AgentRecordCreate Apex action to create a new record or update an existing one based on whether a record ID is provided.</description>
+        <name>Create_Or_Update_Record</name>
+        <label>Create or Update Record</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>AgentRecordCreate</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>objectApiName</name>
+            <value>
+                <elementReference>objectApiName</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>fieldValuesJson</name>
+            <value>
+                <elementReference>fieldValuesJson</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+        <outputParameters>
+            <assignToReference>recordId</assignToReference>
+            <name>recordId</name>
+        </outputParameters>
+        <outputParameters>
+            <assignToReference>success</assignToReference>
+            <name>success</name>
+        </outputParameters>
+        <outputParameters>
+            <assignToReference>errorMessage</assignToReference>
+            <name>errorMessage</name>
+        </outputParameters>
+    </actionCalls>
+    <environments>Default</environments>
+    <interviewLabel>WSM - ALF - Agent: Create or Update Record {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>WSM - ALF - Agent: Create or Update Record</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Or_Update_Record</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>The API name of the Salesforce object to create or update a record on. Use the exact API name including the __c suffix for custom objects. Examples: Account, Contact, Opportunity, Case, My_Custom_Object__c. Call the Describe Object Schema action first if you are unsure of the correct name.</description>
+        <name>objectApiName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>A JSON object mapping field API names to the values to set. Example: {"Name": "Acme Corp", "Industry": "Technology", "Phone": "555-1234"}. Use date format YYYY-MM-DD, datetime format YYYY-MM-DDTHH:MM:SSZ, booleans as true or false, and numbers without currency symbols or commas. When updating, only include the fields you want to change — all other fields remain untouched. Set a field to null to clear its value.</description>
+        <name>fieldValuesJson</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Optional for create, required for update. When provided, updates the existing record with this ID instead of creating a new one. Leave blank to create a new record. On success, this output contains the ID of the created or updated record.</description>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>True if the record was created or updated successfully, false if there was an error. Always check this before using the record ID. When false, read errorMessage for details.</description>
+        <name>success</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Description of the error when success is false. Common errors include: required field missing, invalid field value, insufficient access permissions, validation rule failure, record not found. Empty when success is true.</description>
+        <name>errorMessage</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

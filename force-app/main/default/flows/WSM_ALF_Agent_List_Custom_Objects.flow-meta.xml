@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <actionCalls>
+        <description>Calls the AgentListCustomObjects Apex action to return a list of all custom objects in the org with their API names, labels, and metadata.</description>
+        <name>List_Custom_Objects</name>
+        <label>List Custom Objects</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>AgentListCustomObjects</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>includeManagedPackageObjects</name>
+            <value>
+                <elementReference>includeManagedPackageObjects</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>filterKeyword</name>
+            <value>
+                <elementReference>filterKeyword</elementReference>
+            </value>
+        </inputParameters>
+        <outputParameters>
+            <assignToReference>objectsJson</assignToReference>
+            <name>objectsJson</name>
+        </outputParameters>
+        <outputParameters>
+            <assignToReference>objectCount</assignToReference>
+            <name>objectCount</name>
+        </outputParameters>
+        <outputParameters>
+            <assignToReference>success</assignToReference>
+            <name>success</name>
+        </outputParameters>
+        <outputParameters>
+            <assignToReference>errorMessage</assignToReference>
+            <name>errorMessage</name>
+        </outputParameters>
+    </actionCalls>
+    <environments>Default</environments>
+    <interviewLabel>WSM - ALF - Agent: List Custom Objects {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>WSM - ALF - Agent: List Custom Objects</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>List_Custom_Objects</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>When true, includes custom objects from installed managed packages (objects with a namespace prefix like ns__Object__c). Defaults to false to show only objects created directly in this org.</description>
+        <name>includeManagedPackageObjects</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Optional keyword to filter the results. Only objects whose API name or label contains this text (case-insensitive) are returned. Leave blank to return all custom objects.</description>
+        <name>filterKeyword</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>JSON array of custom objects found. Each element contains apiName, label, pluralLabel, isCreateable, isQueryable, and keyPrefix. Parse this to find the object you need, then use Describe Object Schema to get its fields.</description>
+        <name>objectsJson</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Total number of custom objects returned. Use this to confirm results were found before parsing the JSON.</description>
+        <name>objectCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <scale>0</scale>
+    </variables>
+    <variables>
+        <description>True if the custom objects were retrieved successfully, false if there was an error. Always check this before using the results.</description>
+        <name>success</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Description of the error when success is false. Empty when success is true.</description>
+        <name>errorMessage</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

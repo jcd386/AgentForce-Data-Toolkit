@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <actionCalls>
+        <description>Calls the AgentSOQLQuery Apex action to execute the provided SOQL query string and return results as JSON.</description>
+        <name>Execute_Query</name>
+        <label>Execute SOQL Query</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>AgentSOQLQuery</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>query</name>
+            <value>
+                <elementReference>query</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>maxRecords</name>
+            <value>
+                <elementReference>maxRecords</elementReference>
+            </value>
+        </inputParameters>
+        <outputParameters>
+            <assignToReference>resultsJson</assignToReference>
+            <name>resultsJson</name>
+        </outputParameters>
+        <outputParameters>
+            <assignToReference>recordCount</assignToReference>
+            <name>recordCount</name>
+        </outputParameters>
+        <outputParameters>
+            <assignToReference>success</assignToReference>
+            <name>success</name>
+        </outputParameters>
+        <outputParameters>
+            <assignToReference>errorMessage</assignToReference>
+            <name>errorMessage</name>
+        </outputParameters>
+    </actionCalls>
+    <environments>Default</environments>
+    <interviewLabel>WSM - ALF - Agent: Execute SOQL Query {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>WSM - ALF - Agent: Execute SOQL Query</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Execute_Query</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>The SOQL query string to execute. Write standard SOQL syntax: SELECT fields FROM Object WHERE conditions. Always include a LIMIT clause. Example: SELECT Id, Name FROM Account WHERE Industry = 'Technology' LIMIT 10. The query runs in the current user's security context so only accessible records and fields are returned.</description>
+        <name>query</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Maximum number of records to return. Defaults to 200 if not provided. Maximum allowed value is 2000. If the query already contains a LIMIT clause, this value is ignored. Use lower values when you only need a few results.</description>
+        <name>maxRecords</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+    </variables>
+    <variables>
+        <description>JSON array of the query results. Each element is an object with field API names as keys and their values. Returns an empty array [] if no records match the query. Parse this JSON to extract the specific values you need.</description>
+        <name>resultsJson</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>The number of records returned by the query. Use this to check if any results were found before attempting to parse the results JSON.</description>
+        <name>recordCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <scale>0</scale>
+    </variables>
+    <variables>
+        <description>True if the query executed successfully, false if there was an error. Always check this before using the results. When false, read errorMessage for details.</description>
+        <name>success</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Description of the error when success is false. Common errors include: invalid field name, invalid object name, SOQL syntax error, or insufficient access permissions. Empty when success is true.</description>
+        <name>errorMessage</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

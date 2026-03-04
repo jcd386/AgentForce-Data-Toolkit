@@ -1,0 +1,14 @@
+# Salesforce
+.sfdx/
+.sf/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Node (if any LWC added later)
+node_modules/

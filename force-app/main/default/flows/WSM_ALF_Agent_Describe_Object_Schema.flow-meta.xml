@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <actionCalls>
+        <description>Calls the AgentObjectDescribe Apex action to return the complete field-level schema for the specified Salesforce object.</description>
+        <name>Describe_Object</name>
+        <label>Describe Object Schema</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>AgentObjectDescribe</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>objectApiName</name>
+            <value>
+                <elementReference>objectApiName</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>includePicklistValues</name>
+            <value>
+                <elementReference>includePicklistValues</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>includeRelationships</name>
+            <value>
+                <elementReference>includeRelationships</elementReference>
+            </value>
+        </inputParameters>
+        <outputParameters>
+            <assignToReference>schemaJson</assignToReference>
+            <name>schemaJson</name>
+        </outputParameters>
+        <outputParameters>
+            <assignToReference>fieldCount</assignToReference>
+            <name>fieldCount</name>
+        </outputParameters>
+        <outputParameters>
+            <assignToReference>success</assignToReference>
+            <name>success</name>
+        </outputParameters>
+        <outputParameters>
+            <assignToReference>errorMessage</assignToReference>
+            <name>errorMessage</name>
+        </outputParameters>
+    </actionCalls>
+    <environments>Default</environments>
+    <interviewLabel>WSM - ALF - Agent: Describe Object Schema {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>WSM - ALF - Agent: Describe Object Schema</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Describe_Object</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>The API name of the Salesforce object to describe. Use the exact API name including the __c suffix for custom objects. Examples: Account, Contact, Opportunity, Case, My_Custom_Object__c.</description>
+        <name>objectApiName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>When true, includes the active picklist values for each picklist and multi-select picklist field. Defaults to false to reduce response size. Set to true when you need to know valid values before creating or updating a record.</description>
+        <name>includePicklistValues</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>When true, includes parent lookup and master-detail relationship target objects, relationship names, and child relationship details. Defaults to false. Set to true when you need to understand how objects are connected to each other.</description>
+        <name>includeRelationships</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>JSON object describing the object schema. Contains objectLabel, objectApiName, isCustom, isCreateable, fieldCount, and a fields array. Each field includes apiName, label, type, required, createable, updateable, and length. Optionally includes picklistValues and relationship details.</description>
+        <name>schemaJson</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Total number of fields on the object that are accessible to the current user.</description>
+        <name>fieldCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <scale>0</scale>
+    </variables>
+    <variables>
+        <description>True if the object was found and described successfully, false if there was an error. Always check this before using the schema JSON. When false, read errorMessage for details.</description>
+        <name>success</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Description of the error when success is false. Common errors include: object does not exist, object is not accessible to the current user. Empty when success is true.</description>
+        <name>errorMessage</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>
