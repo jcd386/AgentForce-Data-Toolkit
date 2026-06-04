@@ -10,7 +10,7 @@ public with sharing class AgentSOQLQuery {
 
         @InvocableVariable(
             label='Max Records'
-            description='Maximum number of records to return. Defaults to 200 if not provided. Clamped to a maximum of 2000. If the query already contains a LIMIT clause, this value is ignored. Use lower values when you only need a few results to reduce token usage.'
+            description='Maximum number of records to return. Defaults to 2000 if not provided. Clamped to a maximum of 2000. Ignored for SELECT COUNT() queries (which return a single number) and when the query already contains a LIMIT clause.'
         )
         public Integer maxRecords;
     }
@@ -52,18 +52,30 @@ public with sharing class AgentSOQLQuery {
                 return output;
             }
 
-            Integer maxRows = (input.maxRecords == null) ? 200 : input.maxRecords;
+            Integer maxRows = (input.maxRecords == null) ? 2000 : input.maxRecords;
             maxRows = Math.max(1, Math.min(maxRows, 2000));
 
             String soql = input.query;
-            if (!soql.toLowerCase().contains(' limit ')) {
-                soql = soql + ' LIMIT ' + maxRows;
-            }
 
-            List<SObject> records = Database.query(soql);
-            output.resultsJson = JSON.serialize(records);
-            output.recordCount = records.size();
-            output.success = true;
+            // Detect SELECT COUNT() with no field arg — Salesforce requires Database.countQuery() for these
+            // and forbids a LIMIT clause. Match patterns like "SELECT COUNT() FROM ..." with optional whitespace.
+            Pattern countPattern = Pattern.compile('(?i)^\\s*SELECT\\s+COUNT\\s*\\(\\s*\\)\\s+FROM\\s+');
+            Boolean isCountQuery = countPattern.matcher(soql).find();
+
+            if (isCountQuery) {
+                Integer count = Database.countQuery(soql);
+                output.resultsJson = '[{"count":' + count + '}]';
+                output.recordCount = count;
+                output.success = true;
+            } else {
+                if (!soql.toLowerCase().contains(' limit ')) {
+                    soql = soql + ' LIMIT ' + maxRows;
+                }
+                List<SObject> records = Database.query(soql);
+                output.resultsJson = JSON.serialize(records);
+                output.recordCount = records.size();
+                output.success = true;
+            }
         } catch (Exception e) {
             output.success = false;
             output.errorMessage = 'Query error: ' + e.getMessage();
