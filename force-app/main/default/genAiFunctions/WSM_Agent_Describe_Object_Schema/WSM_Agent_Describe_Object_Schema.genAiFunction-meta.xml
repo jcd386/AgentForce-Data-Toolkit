@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Get the complete field-level schema for any Salesforce object. Always call before creating or updating records if you do not know the required fields. Set includePicklistValues to true when creating or updating. Set includeRelationships to true to see object connections.</description>
+    <invocationTarget>WSM_ALF_Agent_Describe_Object_Schema</invocationTarget>
+    <invocationTargetType>flow</invocationTargetType>
+    <masterLabel>WSM - ALF - Agent: Describe Object Schema</masterLabel>
+</GenAiFunction>

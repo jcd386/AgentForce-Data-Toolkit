@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Template agent demonstrating the WSM Data Toolkit — dynamic SOQL queries, SOSL searches, record creation and updates, object schema discovery, and custom object listing. Deploy this agent and customize the topic instructions for your use case.</description>
+    <genAiPlugins>
+        <genAiPluginName>WSM_Salesforce_Data_Management</genAiPluginName>
+    </genAiPlugins>
+    <masterLabel>WSM Data Toolkit Agent</masterLabel>
+    <plannerType>AiCopilot__ReAct</plannerType>
+</GenAiPlannerBundle>

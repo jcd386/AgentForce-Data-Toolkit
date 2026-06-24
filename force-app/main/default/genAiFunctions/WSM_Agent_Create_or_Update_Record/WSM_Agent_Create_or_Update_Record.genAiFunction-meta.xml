@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Create a new Salesforce record or update an existing one. To create: provide objectApiName and fieldValuesJson, leave recordId blank. To update: also provide recordId with only the fields to change. Always call Describe Object Schema first to confirm required fields and valid picklist values.</description>
+    <invocationTarget>WSM_ALF_Agent_Create_Or_Update_Record</invocationTarget>
+    <invocationTargetType>flow</invocationTargetType>
+    <masterLabel>WSM - ALF - Agent: Create or Update Record</masterLabel>
+</GenAiFunction>

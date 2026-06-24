@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Execute a SOQL query and return results as JSON. Use for precise, structured data retrieval with filtering, sorting, and aggregation. Always include a LIMIT clause. Check the success output before using results. If you get field name errors, call Describe Object Schema first.</description>
+    <invocationTarget>WSM_ALF_Agent_Execute_SOQL_Query</invocationTarget>
+    <invocationTargetType>flow</invocationTargetType>
+    <masterLabel>WSM - ALF - Agent: Execute SOQL Query</masterLabel>
+</GenAiFunction>

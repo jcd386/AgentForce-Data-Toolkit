@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Execute a fuzzy text search across multiple objects using SOSL. Best for name lookups and partial matching. Always wrap search terms in curly braces and include a LIMIT. Results are JSON keyed by object name.</description>
+    <invocationTarget>WSM_ALF_Agent_Execute_SOSL_Search</invocationTarget>
+    <invocationTargetType>flow</invocationTargetType>
+    <masterLabel>WSM - ALF - Agent: Execute SOSL Search</masterLabel>
+</GenAiFunction>
